@@ -1,0 +1,22 @@
+[
+    {
+        "prenom": "Damien",
+        "nom": "Codebecq",
+        "login": "dcodebecq",
+        "password": "password",
+        "role": "utilisateur",
+        "site": "Rennes",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Admin",
+        "nom": "Principal",
+        "login": "admin",
+        "password": "admin",
+        "role": "admin",
+        "site": "Paris",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    }
+]
