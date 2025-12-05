@@ -9,9 +9,9 @@ def load_users():
         f = open(FILE, "r")
         users = json.load(f)
         f.close()
-        for user in users:
-            if user["locked_until"]:
-                user["locked_until"] = datetime.fromisoformat(user["locked_until"])
+        for u in users:
+            if u["locked_until"]:
+                u["locked_until"] = datetime.fromisoformat(u["locked_until"])
         return users
     except:
         return []
@@ -33,39 +33,39 @@ def find_user(login, users):
             return user
     return None
 
-users = load_users()
+def authentification():
+    users = load_users()
+    while True:
+        print("----------------------------")
+        login_input = input("Login : ")
+        password_input = getpass.getpass("Mot de passe : ")
 
-while True:
-    print("----------------------------")
-    login_input = input("Login : ")
-    password_input = getpass.getpass("Mot de passe : ")
+        user = find_user(login_input, users)
+        if not user:
+            print("Utilisateur inconnu")
+            continue
 
-    user = find_user(login_input, users)
-    if not user:
-        print("Utilisateur inconnu")
-        continue
+        if user["locked_until"]:
+            if datetime.now() < user["locked_until"]:
+                print("Compte bloqué temporairement")
+                print("Réessayez après :", user["locked_until"].strftime("%d/%m/%Y %H:%M:%S"))
+                return None
+            else:
+                user["locked_until"] = None
 
-    if user["locked_until"]:
-        if datetime.now() < user["locked_until"]:
-            print("Compte bloqué temporairement")
-            print("Réessayez après :", user["locked_until"])
-            break
-        else:
-            user["locked_until"] = None
+        if user["password"] == password_input:
+            print("Connexion réussie")
+            user["tentatives_restantes"] = 3
+            save_users(users)
+            print("Bienvenue", user["prenom"], user["nom"], ",", user["role"], "du site", user["site"])
+            return user
 
-    if user["password"] == password_input:
-        print("Connexion réussie")
-        user["tentatives_restantes"] = 3
+        user["tentatives_restantes"] -= 1
+        print("Identifiants incorrects (", user["tentatives_restantes"], "tentatives restantes )")
+
+        if user["tentatives_restantes"] <= 0:
+            user["locked_until"] = datetime.now() + timedelta(minutes=15)
+            user["tentatives_restantes"] = 3
+            print("Compte bloqué pendant 15 minutes")
+
         save_users(users)
-        print("Bienvenue", user["prenom"], user["nom"], ",", user["role"], "du site", user["site"])
-        break
-
-    user["tentatives_restantes"] -= 1
-    print("Identifiants incorrects (", user["tentatives_restantes"], "tentatives restantes )")
-
-    if user["tentatives_restantes"] <= 0:
-        user["locked_until"] = datetime.now() + timedelta(minutes=15)
-        user["tentatives_restantes"] = 3
-        print("Compte bloqué pendant 15 minutes")
-
-    save_users(users)
