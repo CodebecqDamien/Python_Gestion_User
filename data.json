@@ -1,20 +1,10 @@
 [
     {
-        "prenom": "Damien",
-        "nom": "Codebecq",
-        "login": "dcodebecq",
-        "password": "123",
-        "role": "utilisateur",
-        "site": "Rennes",
-        "tentatives_restantes": 3,
-        "locked_until": null
-    },
-    {
-        "prenom": "Admin",
-        "nom": "Principal",
-        "login": "admin",
+        "prenom": "Super",
+        "nom": "Admin",
+        "login": "sadmin",
         "password": "admin",
-        "role": "admin",
+        "role": "super-admin",
         "site": "Paris",
         "tentatives_restantes": 3,
         "locked_until": null
@@ -27,11 +17,11 @@
         "role": "admin",
         "site": "Marseille",
         "tentatives_restantes": 3,
-        "locked_until": 1765122116.610913
+        "locked_until": null
     },
     {
-        "prenom": "hugo",
-        "nom": "dimanche",
+        "prenom": "Hugo",
+        "nom": "Dimanche",
         "login": "hdimanche",
         "password": "Wwq!Pb^01I",
         "role": "admin",
@@ -45,6 +35,36 @@
         "login": "bheng",
         "password": "p#Je2X5X^O",
         "role": "admin",
+        "site": "Grenoble",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Damien",
+        "nom": "Codebecq",
+        "login": "dcodebecq",
+        "password": "!&HY2iDQ@@",
+        "role": "utilisateur",
+        "site": "Rennes",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Jean",
+        "nom": "Dupont",
+        "login": "jdupont",
+        "password": "Ok$$Z$wpVP",
+        "role": "utilisateur",
+        "site": "Marseille",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Marie",
+        "nom": "Jeanne",
+        "login": "mjeanne",
+        "password": "KsqZUUo%Uk",
+        "role": "utilisateur",
         "site": "Grenoble",
         "tentatives_restantes": 3,
         "locked_until": null
