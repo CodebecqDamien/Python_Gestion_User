@@ -5,9 +5,6 @@ import time
 
 FICHIER = "data.json"
 
-# ------------------------
-# Chargement et sauvegarde
-# ------------------------
 def charger_utilisateurs():
     try:
         with open(FICHIER, "r") as f:
@@ -19,9 +16,6 @@ def sauvegarder_utilisateurs(utilisateurs):
     with open(FICHIER, "w") as f:
         json.dump(utilisateurs, f, indent=4)
 
-# ------------------------
-# Génération login / mot de passe
-# ------------------------
 def generer_login(prenom, nom):
     return (prenom[0] + nom).lower()
 
@@ -29,9 +23,6 @@ def generer_pwd(taille=10):
     chars = string.ascii_letters + string.digits + "!@#$%^&*"
     return "".join(random.choice(chars) for _ in range(taille))
 
-# ------------------------
-# Création utilisateur
-# ------------------------
 def creer_utilisateur():
     utilisateurs = charger_utilisateurs()
 
@@ -39,7 +30,7 @@ def creer_utilisateur():
     nom = input("Nom : ")
     login = generer_login(prenom, nom)
     pwd = generer_pwd()
-    role = input("Rôle (admin/utilisateur) : ")
+    role = input("Rôle : ")
     site = input("Site : ")
 
     nouvel_user = {
@@ -57,18 +48,12 @@ def creer_utilisateur():
     sauvegarder_utilisateurs(utilisateurs)
     print(f"\nUtilisateur créé ! Login : {login} | Password : {pwd}\n")
 
-# ------------------------
-# Consultation
-# ------------------------
 def afficher_utilisateurs():
     utilisateurs = charger_utilisateurs()
     print("\n--- Liste des utilisateurs ---")
     for u in utilisateurs:
         print(f"{u['login']} - {u['prenom']} {u['nom']} ({u['role']}, {u['site']})")
 
-# ------------------------
-# Recherche
-# ------------------------
 def rechercher_utilisateur():
     utilisateurs = charger_utilisateurs()
     mot = input("Recherche (login / prénom / nom) : ").lower()
@@ -80,9 +65,6 @@ def rechercher_utilisateur():
     if not trouve:
         print("Aucun utilisateur trouvé.")
 
-# ------------------------
-# Modification
-# ------------------------
 def modifier_utilisateur():
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à modifier : ")
@@ -97,9 +79,6 @@ def modifier_utilisateur():
             return
     print("Utilisateur introuvable.")
 
-# ------------------------
-# Suppression
-# ------------------------
 def supprimer_utilisateur(admin_login, admin_site):
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à supprimer : ")
@@ -107,14 +86,12 @@ def supprimer_utilisateur(admin_login, admin_site):
     for u in utilisateurs:
         if u["login"] == login:
 
-            # Super admin = site Paris
             if admin_login == "admin" and admin_site == "Paris":
                 utilisateurs.remove(u)
                 sauvegarder_utilisateurs(utilisateurs)
                 print("Utilisateur supprimé (super admin).")
                 return
 
-            # Admin local = même site
             if u["site"] == admin_site:
                 utilisateurs.remove(u)
                 sauvegarder_utilisateurs(utilisateurs)

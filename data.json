@@ -3,7 +3,7 @@
         "prenom": "Damien",
         "nom": "Codebecq",
         "login": "dcodebecq",
-        "password": "admin",
+        "password": "123",
         "role": "utilisateur",
         "site": "Rennes",
         "tentatives_restantes": 3,
@@ -16,6 +16,36 @@
         "password": "admin",
         "role": "admin",
         "site": "Paris",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Dylan",
+        "nom": "Kurul",
+        "login": "dkurul",
+        "password": "om#q5%yBqr",
+        "role": "admin",
+        "site": "Marseille",
+        "tentatives_restantes": 3,
+        "locked_until": 1765122116.610913
+    },
+    {
+        "prenom": "hugo",
+        "nom": "dimanche",
+        "login": "hdimanche",
+        "password": "Wwq!Pb^01I",
+        "role": "admin",
+        "site": "Rennes",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Billy",
+        "nom": "Heng",
+        "login": "bheng",
+        "password": "p#Je2X5X^O",
+        "role": "admin",
+        "site": "Grenoble",
         "tentatives_restantes": 3,
         "locked_until": null
     }
