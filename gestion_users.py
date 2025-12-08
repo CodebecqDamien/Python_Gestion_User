@@ -26,7 +26,7 @@ def creer_utilisateur(admin_login, admin_site, admin_role):
     nom = input("Nom : ")
     login = (prenom[0] + nom).lower()
     pwd = generer_pwd()
-    role = input("Rôle (super-admin/admin/utilisateur) : ")
+    role = input("Rôle : ")
     site = input("Site : ")
 
     if admin_role != "super-admin" and site != admin_site:
