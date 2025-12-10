@@ -5,7 +5,7 @@ def menu_principal():
     login, role, site = None, None, None
 
     print("Bienvenue dans la console de gestion du système d'information.")
-    print("Veuillez vous authentifier.")
+    print("Veuillez vous Connecter.")
     
     while not login:
         login, role, site = connexion()

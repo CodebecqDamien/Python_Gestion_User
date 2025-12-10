@@ -26,7 +26,7 @@ def generer_pwd():
         except ValueError:
             print("Veuillez entrer un nombre valide.\n")
 
-    chars = string.ascii_letters + string.digits + "!@#$%^&*"
+    chars = string.ascii_letters + string.digits + string.punctuation
 
     # Génération du mot de passe
     pwd = "".join(random.choice(chars) for _ in range(taille))
