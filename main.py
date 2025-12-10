@@ -45,7 +45,7 @@ def menu_principal():
         else:
             print("\n Choix invalide, merci de réessayer.")
 
-def menu_gestion_utilisateurs(admin_login, admin_site, admin_role): 
+def menu_gestion_utilisateurs(login, admin_site, admin_role): 
     while True:
         print("\n **** Menu Gestion des Utilisateurs ****")
         print("1 - Création d'un Utilisateur")
@@ -59,13 +59,13 @@ def menu_gestion_utilisateurs(admin_login, admin_site, admin_role):
         print("--------------------------------")
 
         if choix == "1":
-            creer_utilisateur(admin_login, admin_site, admin_role)
+            creer_utilisateur(admin_site, admin_role)
         elif choix == "2":
-            modifier_utilisateur(admin_login, admin_site, admin_role)
+            modifier_utilisateur(admin_site, admin_role)
         elif choix == "3":
-            supprimer_utilisateur(admin_login, admin_site, admin_role)
+            supprimer_utilisateur(admin_site, admin_role)
         elif choix == "4":
-            afficher_utilisateurs(admin_login, admin_site, admin_role)
+            afficher_utilisateurs(admin_site, admin_role)
         elif choix == "5":
             rechercher_utilisateur()
         elif choix == "0":

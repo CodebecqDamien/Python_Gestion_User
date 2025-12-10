@@ -19,7 +19,7 @@ def generer_pwd(taille=10):
     chars = string.ascii_letters + string.digits + "!@#$%^&*"
     return "".join(random.choice(chars) for _ in range(taille))
 
-def creer_utilisateur(admin_login, admin_site, admin_role):
+def creer_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
 
     prenom = input("Prénom : ")
@@ -29,8 +29,11 @@ def creer_utilisateur(admin_login, admin_site, admin_role):
     role = input("Rôle : ")
     site = input("Site : ")
 
-    if admin_role != "super-admin" and site != admin_site:
-        print("Vous ne pouvez créer que des utilisateurs de votre site.")
+    if admin_role == "admin" and role == "admin" :
+        print("un administrateur ne peux pas crée un autre administrateur")
+        return
+    if admin_role != "super-admin" and site != admin_site :
+        print("Vous ne pouvez créer que des utilisateurs de votre site ou vous devez super-admin.")
         return
 
     nouvel_user = {
@@ -48,7 +51,7 @@ def creer_utilisateur(admin_login, admin_site, admin_role):
     sauvegarder_utilisateurs(utilisateurs)
     print(f"\nUtilisateur créé ! Login : {login} | Password : {pwd}\n")
 
-def modifier_utilisateur(admin_login, admin_site, admin_role):
+def modifier_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à modifier : ")
 
@@ -63,6 +66,10 @@ def modifier_utilisateur(admin_login, admin_site, admin_role):
             u["role"] = input(f"Nouveau rôle [{u['role']}] : ") or u['role']
             u["site"] = input(f"Nouveau site [{u['site']}] : ") or u['site']
 
+            if admin_role == "admin":
+                print("un administrateur ne peux pas modifié un autre administrateur")
+                return
+
             if admin_role != "super-admin" and u["site"] != admin_site:
                 print("Un admin local ne peut pas changer le site d’un utilisateur.")
                 return
@@ -73,12 +80,17 @@ def modifier_utilisateur(admin_login, admin_site, admin_role):
 
     print("Utilisateur introuvable.")
 
-def supprimer_utilisateur(admin_login, admin_site, admin_role):
+def supprimer_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à supprimer : ")
 
     for u in utilisateurs:
         if u["login"] == login:
+
+            if admin_role == "admin" :
+                print("un administrateur ne peux pas supprimé un autre administrateur")
+                return
+            
             if admin_role != "super-admin" and u["site"] != admin_site:
                 print("Vous ne pouvez supprimer que les utilisateurs de votre site.")
                 return
@@ -90,7 +102,7 @@ def supprimer_utilisateur(admin_login, admin_site, admin_role):
 
     print("Utilisateur introuvable.")
 
-def afficher_utilisateurs(admin_login, admin_site, admin_role):
+def afficher_utilisateurs(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
     print("\n--- Liste des utilisateurs ---")
 
