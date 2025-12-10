@@ -32,10 +32,16 @@ def creer_utilisateur(admin_site, admin_role):
     if admin_role == "admin" and role == "admin" :
         print("un administrateur ne peux pas crée un autre administrateur")
         return
+    
     if admin_role != "super-admin" and site != admin_site :
         print("Vous ne pouvez créer que des utilisateurs de votre site ou vous devez super-admin.")
         return
-
+    
+    for u in utilisateurs:
+        if u["login"] == login:
+            print("Login déjà existant. Création annulée.")
+            return
+            
     nouvel_user = {
         "prenom": prenom,
         "nom": nom,
