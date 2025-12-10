@@ -68,5 +68,15 @@
         "site": "Grenoble",
         "tentatives_restantes": 3,
         "locked_until": null
+    },
+    {
+        "prenom": "pascal",
+        "nom": "pascalou",
+        "login": "ppascalou",
+        "password": "249e80b300f8d16dd7197f8c5497329443a06124bfbbe8c0b71d2643b5018de8",
+        "role": "utilisateur",
+        "site": "Rennes",
+        "tentatives_restantes": 3,
+        "locked_until": null
     }
 ]

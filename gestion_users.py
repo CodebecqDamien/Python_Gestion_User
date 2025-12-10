@@ -42,7 +42,7 @@ def creer_utilisateur(admin_site, admin_role):
     prenom = input("Prénom : ")
     nom = input("Nom : ")
     login = (prenom[0] + nom).lower()
-    pwd = generer_pwd()
+    pwd, pwd_hash = generer_pwd()  # récupération du mot de passe et du hash 
     role = input("Rôle : ")
     site = input("Site : ")
 
@@ -63,7 +63,7 @@ def creer_utilisateur(admin_site, admin_role):
         "prenom": prenom,
         "nom": nom,
         "login": login,
-        "password": pwd,
+        "password": pwd_hash,
         "role": role,
         "site": site,
         "tentatives_restantes": 3,
