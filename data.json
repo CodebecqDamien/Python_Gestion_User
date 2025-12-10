@@ -3,7 +3,7 @@
         "prenom": "Super",
         "nom": "Admin",
         "login": "sadmin",
-        "password": "admin",
+        "password": "32c76a2f2318383b6713545bac2ffc55b73ad57464df3e21fbc14c18f31888c2",
         "role": "super-admin",
         "site": "Paris",
         "tentatives_restantes": 3,

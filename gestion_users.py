@@ -1,6 +1,7 @@
 import json
 import random
 import string
+import hashlib
 
 FICHIER = "data.json"
 
@@ -15,9 +16,25 @@ def sauvegarder_utilisateurs(utilisateurs):
     with open(FICHIER, "w") as f:
         json.dump(utilisateurs, f, indent=4)
 
-def generer_pwd(taille=10):
+def generer_pwd():
+    while True:
+        try:
+            taille = int(input("Choisir le nombre de caractères du mot de passe (minimum 10): "))
+            if taille >= 10:
+                break
+            print("La taille minimale est de 10 caractères.\n")
+        except ValueError:
+            print("Veuillez entrer un nombre valide.\n")
+
     chars = string.ascii_letters + string.digits + "!@#$%^&*"
-    return "".join(random.choice(chars) for _ in range(taille))
+
+    # Génération du mot de passe
+    pwd = "".join(random.choice(chars) for _ in range(taille))
+
+    # Hachage
+    pwd_hash = hashlib.sha256(pwd.encode()).hexdigest()
+
+    return pwd, pwd_hash
 
 def creer_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
