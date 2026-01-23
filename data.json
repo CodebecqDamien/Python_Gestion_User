@@ -30,16 +30,6 @@
         "locked_until": null
     },
     {
-        "prenom": "Damien",
-        "nom": "Codebecq",
-        "login": "dcodebecq",
-        "password": "d203020be0b4e07d8ebb4821bc6fb2ae70df47203f232262665e0ac29414d3d5",
-        "role": "admin",
-        "site": "Grenoble",
-        "tentatives_restantes": 3,
-        "locked_until": null
-    },
-    {
         "prenom": "Gile",
         "nom": "Gilou",
         "login": "ggilou",
@@ -60,10 +50,30 @@
         "locked_until": null
     },
     {
+        "prenom": "Damien",
+        "nom": "CODEBECQ",
+        "login": "dcodebecq",
+        "password": "dd4f05d107b492df6ca5d394b088d4a0d3a747859bc96c4cbad6d125433db801",
+        "role": "admin",
+        "site": "Grenoble",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
+        "prenom": "Billy",
+        "nom": "Heng",
+        "login": "bheng",
+        "password": "1be06037744b97225d12df610686a6dfef759da2928b331f8a6a06d88b722e91",
+        "role": "utilisateur",
+        "site": "Marseille",
+        "tentatives_restantes": 3,
+        "locked_until": null
+    },
+    {
         "prenom": "tobji",
-        "nom": "Madani",
+        "nom": "madani",
         "login": "tmadani",
-        "password": "1abb83fe2590a58a5283560d7eaef9f9cdb773aafd090b88be910a811c6ad6dd",
+        "password": "6036930a03cc506fe0ccc18ebfd7cb513661e7999692fa44b3cd13c7046feae9",
         "role": "utilisateur",
         "site": "Grenoble",
         "tentatives_restantes": 3,

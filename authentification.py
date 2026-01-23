@@ -44,4 +44,3 @@ def connexion():
 
     print("Login ou mot de passe incorrect.")
     return None, None, None
-

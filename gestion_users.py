@@ -36,22 +36,30 @@ def generer_pwd():
 
     return pwd, pwd_hash
 
+def input_obligatoire(message):
+    while True:
+        valeur = input(message).strip()
+        if valeur:
+            return valeur
+        print("Ce champ ne peut pas être vide !!")
+
+
 def creer_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
 
-    prenom = input("Prénom : ")
-    nom = input("Nom : ")
+    prenom = input_obligatoire("Prénom : ")
+    nom = input_obligatoire("Nom : ")
     login = (prenom[0] + nom).lower()
     pwd, pwd_hash = generer_pwd()  # récupération du mot de passe et du hash 
-    role = input("Rôle : ")
-    site = input("Site : ")
+    role = input_obligatoire("Rôle : ")
+    site = input_obligatoire("Site : ")
 
     if admin_role == "admin" and role == "admin" :
         print("un administrateur ne peux pas crée un autre administrateur")
         return
     
     if admin_role != "super-admin" and site != admin_site :
-        print("Vous ne pouvez créer que des utilisateurs de votre site ou vous devez super-admin.")
+        print("Vous ne pouvez créer que des utilisateurs de votre site ou vous devez être super-admin.")
         return
     
     for u in utilisateurs:
@@ -74,54 +82,99 @@ def creer_utilisateur(admin_site, admin_role):
     sauvegarder_utilisateurs(utilisateurs)
     print(f"\nUtilisateur créé ! Login : {login} | Password : {pwd}\n")
 
+def menu_modification_utilisateur():
+    print("\n**** Modification de l'utilisateur ****")
+    print("1 - Modifier le prénom")
+    print("2 - Modifier le nom")
+    print("3 - Modifier le rôle")
+    print("4 - Modifier le site")
+    print("5 - Régénérer le mot de passe")
+    print("0 - Quitter et sauvegarder")
+    return input("Votre choix : ")
+
 def modifier_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à modifier : ")
 
     for u in utilisateurs:
         if u["login"] == login:
+
             if admin_role != "super-admin" and u["site"] != admin_site:
                 print("Vous n'avez pas les droits pour modifier un utilisateur d'un autre site.")
                 return
 
-            u["prenom"] = input(f"Nouveau prénom [{u['prenom']}] : ") or u['prenom']
-            u["nom"] = input(f"Nouveau nom [{u['nom']}] : ") or u['nom']
-            u["role"] = input(f"Nouveau rôle [{u['role']}] : ") or u['role']
-            u["site"] = input(f"Nouveau site [{u['site']}] : ") or u['site']
-
-            if admin_role == "admin":
-                print("un administrateur ne peux pas modifié un autre administrateur")
+            if admin_role == "admin" and u["role"] == "admin":
+                print("Un administrateur ne peut pas modifier un autre administrateur.")
                 return
 
-            if admin_role != "super-admin" and u["site"] != admin_site:
-                print("Un admin local ne peut pas changer le site d’un utilisateur.")
-                return
+            while True:
+                choix = menu_modification_utilisateur()
 
-            sauvegarder_utilisateurs(utilisateurs)
-            print("Utilisateur modifié.")
-            return
+                if choix == "1":
+                    u["prenom"] = input_obligatoire(f"Nouveau prénom [{u['prenom']}] : ")
+                    u["login"] = (u["prenom"][0] + u["nom"]).lower()
+                    print(f"Nouveau login : {u['login']}")
 
-    print("Utilisateur introuvable.")
+                elif choix == "2":
+                    u["nom"] = input_obligatoire(f"Nouveau nom [{u['nom']}] : ")
+                    u["login"] = (u["prenom"][0] + u["nom"]).lower()
+                    print(f"Nouveau login : {u['login']}")
+
+                elif choix == "3":
+                    if admin_role != "super-admin":
+                        print("Seul un super-admin peut modifier le rôle.")
+                    else:
+                        u["role"] = input_obligatoire(f"Nouveau rôle [{u['role']}] : ")
+
+                elif choix == "4":
+                    if admin_role != "super-admin":
+                        print("Seul un super-admin peut modifier le site.")
+                    else:
+                        u["site"] = input_obligatoire(f"Nouveau site [{u['site']}] : ")
+
+                elif choix == "5":
+                    pwd, pwd_hash = generer_pwd()
+                    u["password"] = pwd_hash
+                    print(f"Nouveau mot de passe : {pwd}")
+
+                elif choix == "0":
+                    sauvegarder_utilisateurs(utilisateurs)
+                    print("Utilisateur modifié.")
+                    return
+
+                else:
+                    print("Choix invalide.")
+    else:
+        print("Utilisateur introuvable.")
 
 def supprimer_utilisateur(admin_site, admin_role):
     utilisateurs = charger_utilisateurs()
     login = input("Login de l'utilisateur à supprimer : ")
+    
+    if login == "sadmin":
+        print("Impossible de supprimer le super-admin.")
+        return
 
     for u in utilisateurs:
         if u["login"] == login:
 
-            if admin_role == "admin" :
-                print("un administrateur ne peux pas supprimé un autre administrateur")
+            if admin_role == "utilisateur":
+                print("Un administrateur ne peux pas supprimé un autre administrateur")
                 return
             
             if admin_role != "super-admin" and u["site"] != admin_site:
                 print("Vous ne pouvez supprimer que les utilisateurs de votre site.")
                 return
 
-            utilisateurs.remove(u)
-            sauvegarder_utilisateurs(utilisateurs)
-            print("Utilisateur supprimé.")
-            return
+            confirmation = input(f"Êtes-vous sûr de vouloir supprimer {login} ? (o/n) ")
+            if confirmation.lower() == 'o':
+                utilisateurs.remove(u)
+                sauvegarder_utilisateurs(utilisateurs)
+                print("Utilisateur supprimé.")
+                return
+            else:
+                print("Suppression annulée.")
+                return
 
     print("Utilisateur introuvable.")
 

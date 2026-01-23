@@ -31,12 +31,17 @@ def menu_principal():
         elif choix == "2":
             print("\n Menu Gestion des Fichiers   pas encore implémenté.")
             input("Appuyez sur Entrée pour revenir au menu principal...")
+            print("--------------------------------")
+
 
         elif choix == "3":
             if role in ["super-admin", "admin"]:
                 print("\n Menu Gestion FTP/Réseau   pas encore implémenté.")
+                input("Appuyez sur Entrée pour revenir au menu principal...")
+                print("--------------------------------")
             else:
                 print("Accès refusé : vous n'avez pas les droits pour ce menu.")
+                print("--------------------------------")
 
         elif choix == "0":
             print("\n Fermeture de l'application. À bientôt.")
